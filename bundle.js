@@ -146,7 +146,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_common_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/common.css */ \"./src/css/common.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _js_controller__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/controller */ \"./src/js/controller/index.js\");\n\r\n\r\n\r\n\r\naddEventListener(\"DOMContentLoaded\", async () => {\r\n  const controller = new _js_controller__WEBPACK_IMPORTED_MODULE_2__.Controller;\r\n  controller.init();\r\n});\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_common_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/common.css */ \"./src/css/common.css\");\n/* harmony import */ var _js_controller__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/controller */ \"./src/js/controller/index.js\");\n\r\n\r\n\r\n\r\naddEventListener(\"DOMContentLoaded\", async () => {\r\n  const controller = new _js_controller__WEBPACK_IMPORTED_MODULE_2__.Controller();\r\n  controller.init();\r\n});\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/index.js?");
 
 /***/ }),
 
