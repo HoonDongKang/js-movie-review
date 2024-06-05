@@ -150,6 +150,46 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css
 
 /***/ }),
 
+/***/ "./src/js/api/api.js":
+/*!***************************!*\
+  !*** ./src/js/api/api.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   fetchPopularMovies: () => (/* binding */ fetchPopularMovies)\n/* harmony export */ });\n/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiClient */ \"./src/js/api/apiClient.js\");\n/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ \"./src/js/api/constants.js\");\n\r\n\r\n\r\nconst fetchPopularMovies = async ({ page = 1 }) => {\r\n  const param = new URLSearchParams({\r\n    api_key: \"570baf9bc127b456f6f789e9d04740f3\",\r\n    language: \"ko-KR\",\r\n    page,\r\n  });\r\n\r\n  const response = await _apiClient__WEBPACK_IMPORTED_MODULE_0__.apiClient.get(`${_constants__WEBPACK_IMPORTED_MODULE_1__.BASE_URL}?${param}`);\r\n\r\n  return response.results;\r\n};\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/api/api.js?");
+
+/***/ }),
+
+/***/ "./src/js/api/apiClient.js":
+/*!*********************************!*\
+  !*** ./src/js/api/apiClient.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   apiClient: () => (/* binding */ apiClient)\n/* harmony export */ });\n/* harmony import */ var _apiError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apiError */ \"./src/js/api/apiError.js\");\n\r\n\r\nconst apiClient = {\r\n  get: async (url, headers = {}) => {\r\n    return apiClient.request(\"GET\", url, null, headers);\r\n  },\r\n\r\n  request: async (method, url, body = null, headers = {}) => {\r\n    const options = {\r\n      method,\r\n      headers: {\r\n        \"Content-Type\": \"application/json\",\r\n        ...headers,\r\n      },\r\n      body: body && JSON.stringify(body),\r\n    };\r\n\r\n    try {\r\n      const response = await fetch(url, options);\r\n\r\n      if (!response.ok) {\r\n        throw new _apiError__WEBPACK_IMPORTED_MODULE_0__.ApiError(response.status);\r\n      }\r\n\r\n      return await response.json();\r\n    } catch (error) {\r\n      if (error instanceof _apiError__WEBPACK_IMPORTED_MODULE_0__.ApiError) {\r\n        _apiError__WEBPACK_IMPORTED_MODULE_0__.ApiError.handle(error);\r\n      } else {\r\n        throw error;\r\n      }\r\n    }\r\n  },\r\n};\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/api/apiClient.js?");
+
+/***/ }),
+
+/***/ "./src/js/api/apiError.js":
+/*!********************************!*\
+  !*** ./src/js/api/apiError.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ApiError: () => (/* binding */ ApiError)\n/* harmony export */ });\n/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ \"./src/js/api/constants.js\");\n\r\n\r\nclass ApiError extends Error {\r\n  status = -1;\r\n\r\n  constructor(message, status) {\r\n    super(message);\r\n    this.status = status;\r\n  }\r\n\r\n  static handle(error) {\r\n    switch (parseInt(error.message)) {\r\n      case 401:\r\n        throw new Error(_constants__WEBPACK_IMPORTED_MODULE_0__.ERROR_MSG.INVALID_API_KEY);\r\n      case 404:\r\n        throw new Error(_constants__WEBPACK_IMPORTED_MODULE_0__.ERROR_MSG.INVALID_REQUEST);\r\n      default:\r\n        throw new Error(_constants__WEBPACK_IMPORTED_MODULE_0__.ERROR_MSG.DEFAULT);\r\n    }\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/api/apiError.js?");
+
+/***/ }),
+
+/***/ "./src/js/api/constants.js":
+/*!*********************************!*\
+  !*** ./src/js/api/constants.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   BASE_URL: () => (/* binding */ BASE_URL),\n/* harmony export */   ERROR_MSG: () => (/* binding */ ERROR_MSG)\n/* harmony export */ });\nconst BASE_URL = \"https://api.themoviedb.org/3/movie/popular\";\r\n\r\nconst ERROR_MSG = {\r\n  INVALID_API_KEY: \"API키가 유효하지 않습니다.\",\r\n  INVALID_REQUEST: \"요청이 올바르지 않습니다.\",\r\n  DEFAULT: \"알 수 없는 오류가 발생했습니다.\",\r\n};\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/api/constants.js?");
+
+/***/ }),
+
 /***/ "./src/js/components/header/header-logo.js":
 /*!*************************************************!*\
   !*** ./src/js/components/header/header-logo.js ***!
@@ -306,17 +346,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   MovieList: () => (/* binding */ MovieList)\n/* harmony export */ });\n/* harmony import */ var _util_fetchMovie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/fetchMovie */ \"./src/js/util/fetchMovie.js\");\n/* harmony import */ var _Movie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Movie */ \"./src/js/domain/Movie.js\");\n\r\n\r\n\r\nclass MovieList {\r\n  #movies = [];\r\n\r\n  async generateMovies({ page }) {\r\n    const movies = await (0,_util_fetchMovie__WEBPACK_IMPORTED_MODULE_0__.fetchPopularMovies)({ page });\r\n\r\n    const movieList = movies.map(\r\n      (movie) =>\r\n        new _Movie__WEBPACK_IMPORTED_MODULE_1__.Movie({\r\n          title: movie.title,\r\n          rating: movie.vote_average,\r\n          thumbnail: `https://image.tmdb.org/t/p/w200${movie.poster_path}`,\r\n        })\r\n    );\r\n\r\n    this.addMovies(movieList);\r\n    return movieList;\r\n  }\r\n\r\n  get movies() {\r\n    return [...this.#movies];\r\n  }\r\n\r\n  addMovies(movies) {\r\n    this.#movies = [...this.#movies, ...movies];\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/domain/MovieList.js?");
-
-/***/ }),
-
-/***/ "./src/js/util/fetchMovie.js":
-/*!***********************************!*\
-  !*** ./src/js/util/fetchMovie.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   fetchPopularMovies: () => (/* binding */ fetchPopularMovies)\n/* harmony export */ });\nconst fetchPopularMovies = async ({ page = 1 }) => {\r\n  const baseUrl = \"https://api.themoviedb.org/3/movie/popular\";\r\n  const param = new URLSearchParams({\r\n    api_key: \"570baf9bc127b456f6f789e9d04740f3\",\r\n    language: \"ko-KR\",\r\n    page,\r\n  });\r\n\r\n  const response = await fetch(`${baseUrl}?${param}`);\r\n  const data = await response.json();\r\n  return data.results;\r\n};\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/util/fetchMovie.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   MovieList: () => (/* binding */ MovieList)\n/* harmony export */ });\n/* harmony import */ var _api_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/api */ \"./src/js/api/api.js\");\n/* harmony import */ var _Movie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Movie */ \"./src/js/domain/Movie.js\");\n\r\n\r\n\r\nclass MovieList {\r\n  #movies = [];\r\n\r\n  async generateMovies({ page }) {\r\n    const movies = await (0,_api_api__WEBPACK_IMPORTED_MODULE_0__.fetchPopularMovies)({ page });\r\n\r\n    const movieList = movies.map(\r\n      (movie) =>\r\n        new _Movie__WEBPACK_IMPORTED_MODULE_1__.Movie({\r\n          title: movie.title,\r\n          rating: movie.vote_average,\r\n          thumbnail: `https://image.tmdb.org/t/p/w200${movie.poster_path}`,\r\n        })\r\n    );\r\n\r\n    this.addMovies(movieList);\r\n    return movieList;\r\n  }\r\n\r\n  get movies() {\r\n    return [...this.#movies];\r\n  }\r\n\r\n  addMovies(movies) {\r\n    this.#movies = [...this.#movies, ...movies];\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://js-movie-review/./src/js/domain/MovieList.js?");
 
 /***/ }),
 
